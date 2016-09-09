@@ -48,7 +48,7 @@ define KernelPackage/usb-musb-hdrc
 	CONFIG_USB_MUSB_HOST=n \
 	CONFIG_USB_MUSB_DEBUG=y
   DEPENDS:= \
-	@(TARGET_omap||TARGET_omap24xx) +kmod-usb-gadget \
+	@(TARGET_omap||TARGET_omap24xx||TARGET_myir) +kmod-usb-gadget \
 	+TARGET_omap24xx:kmod-usb-musb-tusb6010
   FILES:=$(LINUX_DIR)/drivers/usb/musb/musb_hdrc.ko
   AUTOLOAD:=$(call AutoLoad,46,musb_hdrc)
@@ -70,7 +70,7 @@ define KernelPackage/usb-musb-platformglue
 	CONFIG_USB_MUSB_AM35X=n \
 	CONFIG_USB_MUSB_DSPS \
 	CONFIG_USB_MUSB_UX500=n
-  DEPENDS:=@TARGET_omap +kmod-usb-phy-nop +kmod-usb-musb-hdrc +kmod-usb-phy-am335x
+  DEPENDS:=@(TARGET_omap||TARGET_myir) +kmod-usb-phy-nop +kmod-usb-musb-hdrc +kmod-usb-phy-am335x
   FILES:= \
 	$(LINUX_DIR)/drivers/usb/musb/musb_dsps.ko \
 	$(LINUX_DIR)/drivers/usb/musb/musb_am335x.ko
@@ -120,7 +120,7 @@ define KernelPackage/usb-phy-am335x
   KCONFIG:= \
 	CONFIG_AM335X_PHY_USB \
 	CONFIG_AM335X_CONTROL_USB
-  DEPENDS:=@TARGET_omap +kmod-usb-phy-nop
+  DEPENDS:=@(TARGET_omap||TARGET_myir) +kmod-usb-phy-nop
   FILES:= \
 	$(LINUX_DIR)/drivers/usb/phy/phy-am335x.ko \
 	$(LINUX_DIR)/drivers/usb/phy/phy-am335x-control.ko
